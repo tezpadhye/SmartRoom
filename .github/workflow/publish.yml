@@ -9,14 +9,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: dockeer login to github
-      run: |
-        echo $CR_PAT | docker login ghcr.io -u tezpadhye --password-dingdung09
-      env:
-        CR_PAT: ${{ secrets.CR_PAT }}
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.CR_PAT }}
     
     - name: Build the predict-score Docker image
       run: |
-        docker build . --tag ghcr.io/tezpadhye/SmartRoom:latest
-        docker run ghcr.io/tezpadhye/SmartRoom:latest
-        docker push ghcr.io/tezpadhye/SmartRoom:latest
+        docker build . --tag ghcr.io/tezpadhye/predict-score:latest
+        docker run ghcr.io/tezpadhye/predict-score:latest
+        docker push ghcr.io/tezpadhye/predict-score:latest
