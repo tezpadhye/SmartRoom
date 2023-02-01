@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from app.model.model import predict_pipeline as prediction
+from model.model import predict_pipeline as prediction
 
 app = FastAPI()
 
